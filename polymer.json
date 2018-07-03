@@ -1,0 +1,6 @@
+{
+  "npm": true,
+  "moduleResolution": "node",
+  "shell": "app-shell.js",
+  "entrypoint": "index.html"
+}
