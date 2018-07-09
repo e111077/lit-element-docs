@@ -1,9 +1,9 @@
 import { LitElement, html } from '@polymer/lit-element';
 
-class CustomElement extends LitElement {
-  _render({name}){
+class CustomElement extends LitElement {  
+  _render(){
     return html`
-      <h1>Hello ${name}.</h1>
+      <h1>TEMPLATE</h1>
     `;
   }
 }

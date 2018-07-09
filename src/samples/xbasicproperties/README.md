@@ -1,9 +1,18 @@
-## Bind to a property
+<head>
+    <link rel="stylesheet" href="../readme.css">
+    <link rel="stylesheet" href="../../prism.css">
+</head>
+<body>
+
+## TEMPLATE
 
 ```js
-_render({name}){
+_render(){
   return html`
-    <h1>Hello ${name}.</h1>
+    <h1>TEMPLATE</h1>
   `;
 }
 ```
+
+<script src="../../prism.js"></script>
+</body>
