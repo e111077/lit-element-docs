@@ -1,86 +1,138 @@
-
+/**
+ * Map project IDs to their names.
+**/
 export const xprojects = {
-  xbasicsintro:     { id: 'xbasicsintro', active: true, name: 'Introduction' },
-  xstatic:          { id: 'xstatic', active: false, name: 'Create static elements in templates'  },
-  xexpressions:     { id: 'xexpressions', active: false, name: 'Use expressions in templates' }, 
-  xattributes:      { id: 'xattributes', active: false, name: 'Bind to attributes in templates'  }, 
-  xeventlisteners:  { id: 'xeventlisteners', active: false, name: 'Add event handlers to a template'},
-  xlifecycleintro:  { id: 'xlifecycleintro', active: false, name: 'Introduction'  },
-  xcreateroot:      { id: 'xcreateroot', active: false, name: 'Control where an element\'s template is rendered' },
-  xfirstrender:     { id: 'xfirstrender', active: false, name: 'Implement _firstRendered'  },
-  xshouldrender:    { id: 'xshouldrender', active: false, name: 'Control the property changes that trigger a render' },
-  xrender:          { id: 'xrender', active: false, name: 'Describe an element\'s template'  },
-  xdidrender:       { id: 'xdidrender', active: false, name: 'Call methods on rendered elements' },
-  xrendercomplete:  { id: 'xrendercomplete', active: false, name: 'Get a promise which resolves after next render' },
-  xrequestrender:   { id: 'xrequestrender', active: false, name: 'Request asynchronous re-render' },
-  xdataintro:       { id: 'xdataintro', active: false, name: 'Introduction' },
-  xcreateprops:     { id: 'xcreateprops', active: false, name: 'Create properties' },
-  xobservechanges:  { id: 'xobservechanges', active: false, name: 'Observe property changes' },
-  xdatabinding:     { id: 'xdatabinding', active: false, name: 'Data binding' },
-  xobjects:         { id: 'xobjects', active: false, name: 'Work with objects' },
-  xarrays:          { id: 'xarrays', active: false, name: 'Work with arrays' },
-  xstyleintro:      { id: 'xstyleintro', active: false, name: 'Introduction'},
-  xstyle:           { id: 'xstyle', active: false, name: 'Styling'},
-  xtheme:           { id: 'xtheme', active: false, name: 'Create a theme'},
-  xpolymerintro:    { id: 'xpolymerintro', active: false, name: 'Introduction'},
-  xpolymer:         { id: 'xpolymer', active: false, name: 'lit-element for Polymer users'},
-  xeventsintro:     { id: 'xeventsintro', active: false, name: 'Introduction'},
-  xfire:            { id: 'xfire', active: false, name: 'Fire events'},
-  xhandle:          { id: 'xhandle', active: false, name: 'Handle events'}
+  xbasicsintro:     { id: 'xbasicsintro', name: 'Introduction' },
+  xstatic:          { id: 'xstatic', name: 'Create static elements in templates'  },
+  xexpressions:     { id: 'xexpressions', name: 'Use expressions in templates' }, 
+  xattributes:      { id: 'xattributes', name: 'Bind to attributes in templates'  }, 
+  xeventlisteners:  { id: 'xeventlisteners', name: 'Add event handlers to a template'},
+  xlifecycleintro:  { id: 'xlifecycleintro', name: 'Introduction'  },
+  xcreateroot:      { id: 'xcreateroot', name: 'Control where an element\'s template is rendered' },
+  xfirstrender:     { id: 'xfirstrender', name: 'Implement _firstRendered'  },
+  xshouldrender:    { id: 'xshouldrender', name: 'Control the property changes that trigger a render' },
+  xrender:          { id: 'xrender', name: 'Describe an element\'s template'  },
+  xdidrender:       { id: 'xdidrender', name: 'Call methods on rendered elements' },
+  xrendercomplete:  { id: 'xrendercomplete', name: 'Get a promise which resolves after next render' },
+  xrequestrender:   { id: 'xrequestrender', name: 'Request asynchronous re-render' },
+  xdataintro:       { id: 'xdataintro', name: 'Introduction' },
+  xcreateprops:     { id: 'xcreateprops', name: 'Create properties' },
+  xobservechanges:  { id: 'xobservechanges', name: 'Observe property changes' },
+  xdatabinding:     { id: 'xdatabinding', name: 'Data binding' },
+  xobjects:         { id: 'xobjects', name: 'Work with objects' },
+  xarrays:          { id: 'xarrays', name: 'Work with arrays' },
+  xstyleintro:      { id: 'xstyleintro', name: 'Introduction'},
+  xstyle:           { id: 'xstyle', name: 'Styling'},
+  xtheme:           { id: 'xtheme', name: 'Create a theme'},
+  xpolymerintro:    { id: 'xpolymerintro', name: 'Introduction'},
+  xpolymer:         { id: 'xpolymer', name: 'lit-element for Polymer users'},
+  xeventsintro:     { id: 'xeventsintro', name: 'Introduction'},
+  xfire:            { id: 'xfire', name: 'Fire events'},
+  xhandle:          { id: 'xhandle', name: 'Handle events'}
 }
 
-const xdata = [ 'xdataintro', 'xcreateprops', 'xobservechanges', 'xdatabinding', 'xobjects', 'xarrays' ];
-const xbasics = [ 'xbasicsintro', 'xstatic', 'xexpressions', 'xattributes', 'xeventlisteners' ];
-const xlifecycle = [ 'xlifecycleintro', 'xcreateroot', 'xfirstrender', 'xshouldrender', 'xrender', 'xdidrender', 'xrendercomplete', 'xrequestrender' ];
-const xstyling = [ 'xstyleintro', 'xstyle', 'xtheme' ];
-const xpolymerdiff = [ 'xpolymerintro', 'xpolymer' ];
-const xevents = [ 'xeventsintro', 'xfire', 'xhandle' ];
+/**
+ * List of projects in the category 'xdata'.
+**/
+const xdata = [ 
+  'xdataintro', 
+  'xcreateprops', 
+  'xobservechanges', 
+  'xdatabinding', 
+  'xobjects', 
+  'xarrays' 
+];
 
+/**
+ * List of projects in the category 'xbasics'.
+**/
+const xbasics = [ 
+  'xbasicsintro', 
+  'xstatic', 
+  'xexpressions', 
+  'xattributes', 
+  'xeventlisteners' 
+];
+
+/**
+ * List of projects in the category 'xlifecycle'.
+ */
+const xlifecycle = [ 
+  'xlifecycleintro', 
+  'xcreateroot', 
+  'xfirstrender', 
+  'xshouldrender', 
+  'xrender', 
+  'xdidrender', 
+  'xrendercomplete', 
+  'xrequestrender' 
+];
+
+/**
+ * List of projects in the category 'xstyling'.
+ */
+const xstyling = [ 
+  'xstyleintro', 
+  'xstyle', 
+  'xtheme' 
+];
+
+/**
+ * List of projects in the category 'xpolymerdiff'.
+**/
+const xpolymerdiff = [ 
+  'xpolymerintro', 
+  'xpolymer' 
+];
+
+/**
+ * List of projects in the category 'xevents'.
+ */
+const xevents = [ 
+  'xeventsintro', 
+  'xfire', 
+  'xhandle' 
+];
+
+/**
+ * Map category ids to their names and projects.
+ */
 export const xcategories = {
   xbasics: { 
-    id: 'xbasics',
-    active: true,  
-    hidden: false, 
+    id: 'xbasics', 
     name: 'Get started with lit-element', 
     projects: xbasics 
   },
   xpolymerdiff: { 
-    id: 'xpolymerdiff',
-    active: false, 
-    hidden: true, 
+    id: 'xpolymerdiff', 
     name: 'lit-element for Polymer users', 
     projects: xpolymerdiff 
   },
   xdata: { 
-    id: 'xdata',
-    active: false,
-    hidden: true, 
+    id: 'xdata', 
     name: 'Use properties and data', 
     projects: xdata 
   },
   xlifecycle: { 
-    id: 'xlifecycle',
-    active: false, 
-    hidden: true, 
+    id: 'xlifecycle', 
     name: 'Use lit-element lifecycle callbacks', 
     projects: xlifecycle 
   },
   xevents: { 
     id: 'xevents',
-    active: false, 
-    hidden: true,
     name: 'Fire and handle events', 
     projects: xevents 
   },
   xstyling: { 
-    id: 'xstyling',
-    active: false, 
-    hidden: true, 
+    id: 'xstyling', 
     name: 'Style an element or app', 
     projects: xstyling 
   }
 }
 
+/**
+ * Map each project ID to the ID of the category it is in.
+**/
 export const xprojectsToCategories = {
   xdataintro: 'xdata',
   xcreateprops: 'xdata',
@@ -109,4 +161,4 @@ export const xprojectsToCategories = {
   xeventsintro: 'xevents',
   xfire: 'xevents',
   xhandle: 'xevents'
-} 
+}

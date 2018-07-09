@@ -1,6 +1,16 @@
 {
   "npm": true,
   "moduleResolution": "node",
-  "shell": "app-shell.js",
-  "entrypoint": "index.html"
+  "shell": "src/app-shell.js",
+  "entrypoint": "index.html",
+  "sources": ["src/**"],
+  "builds": [
+    {
+      "name": "test",
+      "preset": "uncompiled-unbundled",
+      "js": {"minify": true},
+      "html": {"minify": true},
+      "css": {"minify": true}
+    }
+  ]
 }

@@ -1,12 +1,10 @@
 {
-  "name": "lit-composition",
-  "description": "Composition with lit-element",
+  "name": "lit-element-docs",
+  "description": "lit-element documentation",
   "dependencies": {
     "@polymer/lit-element": "latest",
-    "@stackblitz/sdk": "^1.2.0",
     "@webcomponents/webcomponentsjs": "latest",
-    "github-markdown-css": "^2.10.0",
-    "highlightjs": "^9.10.0"
+    "@stackblitz/sdk": "^1.2.0"
   },
   "version": "1.0.0"
 }

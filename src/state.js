@@ -1,9 +1,18 @@
+/**
+ * Export the initial state.
+ */
 export const startState = {
+  // Active project id.
   activeProject: 'xbasicsintro',
+  // Id of the category containing the active project.
   activeCategory: 'xbasics',
+  // An object denoting expanded categories, keyed by category id.
   expandedCategories: { xbasics: true },  
+  // An object denoting expanded content elements, keyed by element id.
   expandedContent: { readme: true, embed: false },
+  // Whether the active project's embedded code sample is ready to view.
   embedReady: false,
+  // Whether the app is currently in an error state.
   errorState: false
 };
 
@@ -34,13 +43,12 @@ export function changeState(state, action){
     }
     case UPDATE_EMBED_READY: {
       return Object.assign({}, state, {
-        embedReady: true
+        embedReady: action.ready
       });
     }
-    case ERROR_STATE: {
-      console.log('error detail', action.details)
+    case UPDATE_ERROR_STATE: {
       return Object.assign({}, state, {
-        errorState: true
+        errorState: action.detail
       });
     }
     default: return state;
@@ -81,6 +89,7 @@ export function updateContentVisibility(id, visible) {
   };
 }
 
+
 export const UPDATE_EMBED_READY = 'UPDATE_EMBED_READY';
 export function updateEmbedReady(ready) {
   return {
@@ -89,11 +98,10 @@ export function updateEmbedReady(ready) {
   };
 }
 
-export const ERROR_STATE = 'ERROR_STATE';
-export function errorState(details) {
+export const UPDATE_ERROR_STATE = 'UPDATE_ERROR_STATE';
+export function updateErrorState(detail) {
   return {
-    type: ERROR_STATE,
-    details
+    type: UPDATE_ERROR_STATE,
+    detail
   };
 }
-

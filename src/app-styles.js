@@ -1,428 +1,253 @@
-import { html } from '@polymer/lit-element';
-import { repeat } from 'lit-html/lib/repeat.js';
-import { githubmdstyles } from './githubmdstyles.js';
+import { html } from 'lit-html/lib/lit-extended';
 
-/* Assemble the specified items into a style block */
-export function styleblock(styleitems){
-  return html`
-    <style>
-      ${repeat(styleitems, (i) => i, (i, index) => html`${i}`)}
-    </style>
-  `
-}
+/**
+ * App theme part 1: Color definitions. 
+ * Names and uses of colors are based on the {@link https://material.io/design/color/the-color-system.html#color-theme-creation Material Design color system }.
+ * @constant {TemplateResult} colorProps
+ */
+export const colorProps = html`
+    :host {
+      --primary: #512da8;
+      --primaryLight: #8559da;
+      --primaryDark: #130078;
+      
+      --onPrimary: #FFFFFF;
+      --onPrimaryLight: #FFFFFF;
+      --onPrimaryDark: #FFFFFF;
 
-/* Special values that needed to be hardcoded because reasons */
-export const special = { 
-  headerpadding: 20,
-  headerfontsize: 20,
-  headerlineheight: 1,
-  headerfontweight: 100,
+      --secondary: #353535;
+      --secondaryLight: #5d5d5d;
+      --secondaryDark: #0f0f0f;
 
-  h1fontsize: 20,
-  h2fontsize: 18,
-  h3fontsize: 16,
-  h1fontweight: 400,
-  h2fontweight: 300,
-  h3fontweight: 100,
+      --onSecondary: #FFFFFF;
+      --onSecondaryLight: #FFFFFF;
+      --onSecondaryDark: #efefef;
+      
+      --background: #FFFFFF;
+      --surface: #efefef;
+      --error: #b00020;
 
-  h1padding: 16,
+      --onBackground: #353535;
+      --onSurface: #000000;
+      --onError: #FFFFFF;      
+    }
+  `;
 
-  collapsiblepadding: 16,
-  
-  navpadding: 0,
-  navcategorypadding: 16,
-  navcategorylineheight: 1,
-  navcategoryfontsize: 16, 
-  
-  navitemlistpadding: 8,
-  
-  navitempadding: 8,
-  navitemlineheight: 1.25,
-  navitemfontsize: 14,
-
-  footerpadding: 12,
-  footerfontsize: 12,
-  footerlineheight: 1,
-  
-  gutterwidth: 8
-}
-
-/* Conveniences for commonly used styles */
-export const nomargins = html`
+/**
+ * App theme part 2: Typography. 
+ * @constant {TemplateResult} typographyProps
+ */
+export const typographyProps = html`
   :host {
-    margin: 0px;
+    --appFont: Roboto, sans-serif;
+    
+    --fontSize: 16px;
+    --fontSizeBig: 18px;
+    --fontSizeBiggest: 20px;
+
+    --fontWeight: 350;
+    --fontWeightHeavy: 400;
+    --fontWeightHeaviest: 450;
   }
 `;
 
-export const nopadding = html`
+/**
+ * App theme part 3: Layout and spacing. 
+ * @constant {TemplateResult} layoutProps
+ */
+export const layoutProps = html`
   :host {
-    padding: 0px;
+    --gutter: 8px; 
+    /*  
+      --gutter2: 16px;
+      --gutter3: 24px;
+      --gutter4: 32px;
+      --gutter5: 40px; 
+    */
+    --gutter6: 48px; 
   }
+
+  /* 
+  @media(min-width: 600px){
+    :host {
+      display: flex;
+      flex-flow: row wrap;
+    }
+    #header{
+
+    }
+    #nav{
+
+    }
+    #main{
+
+    }
+    #footer{
+
+    }
+  }
+  */
 `;
 
-export const borderbox = html`
-  :host {
-    box-sizing: border-box;
-  }
-`;
-
-export const hostdisplay = html`
-  :host {
+/**
+ * CSS rules for basic custom element display.
+ * @constant {TemplateResult} hostDisplay
+ */
+export const hostDisplay = html`
+  :host{
     display: block;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
   }
   :host([hidden]) {
     display: none;
   }
 `;
 
-/* App theme part 1: Color */
-export const colorprops = html`
+/**
+ * Encapsulated styles for the app-shell element.
+ * @constant {TemplateResult} appShellStyles
+ */
+export const appShellStyles = html`
+  ${hostDisplay}
+  ${colorProps}
+  ${typographyProps}
+  ${layoutProps}
   :host {
-    --primary: #512da8;
-    --onprimary: #FFFFFF;
-    --primarylight: #8559da;
-    --onprimarylight: #FFFFFF;
-    --primarydark: #140078;
-    --onprimarydark: #FFFFFF;
-
-    --secondary: #353535;
-    --onsecondary: #FFFFFF;
-    --secondarylight: #5f5f5f;
-    --onsecondarylight: #FFFFFF;
-    --secondarydark: #0f0f0f;
-    --onsecondarydark: #FFFFFF;
-
-    --background: #FFFFFF;
-    --onbackground: #353535;
-    --surface: #353535;
-    --onsurface: #FFFFFF;
-    --error: #b00020;
-    --onerror: #FFFFFF;
-  }
-`;
-
-/* App theme part 2: Typography */
-export const typographyprops = html`
-  :host {
-    --appfont: Roboto, Helvetica, sans-serif;
-    --appfontsize: 100%;
-    --appfontweight: 100;
-
-    --headerfontsize: ${special.headerfontsize}px;
-    --headerfontweight: ${special.headerfontweight};
-    --footerfontsize: ${special.footerfontsize}px;
-    --navcategoryfontsize: ${special.navcategoryfontsize}px;
-    --navitemfontsize: ${special.navitemfontsize}px;
-
-    --h1fontsize: ${special.h1fontsize}px;
-    --h2fontsize: ${special.h2fontsize}px;
-    --h3fontsize: ${special.h3fontsize}px;
-    --h1fontweight: ${special.h1fontweight};
-    --h2fontweight: ${special.h2fontweight};
-    --h3fontweight: ${special.h3fontweight};
-  }
-`;
-
-/* App theme part 3: Layout and structural stuff */
-export const layoutprops = html`
-  :host {
-    --headerlineheight: ${special.headerlineheight};
-    --headerpadding: ${special.headerpadding}px;  
-    
-    --h1padding: ${special.h1padding}px;  
-
-    --collapsiblepadding: ${special.collapsiblepadding}px;  
-
-    --navpadding: ${special.navpadding}px;
-    --navcategorylineheight: ${special.navcategorylineheight};
-    --navcategorypadding: ${special.navcategorypadding}px;
-
-    --navitemlistpadding: ${special.navitemlistpadding}px;
-    --navitemlineheight: ${special.navitemlineheight};
-    --navitempadding: ${special.navitempadding}px;
-
-    --footerlineheight: ${special.footerlineheight};
-    --footerpadding: ${special.footerpadding}px;    
-    
-    --gutterwidth: ${special.gutterwidth}px;
-  }
-`;
-
-/* Encapsulated styles for app-shell */
-export const appshell = html`
-  ${nomargins}
-  ${nopadding}
-
-  :host {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    font-family: var(--appfont);
-    font-size: var(--appfontsize);
-    font-weight: var(--appfontweight);
+    font-family: var(--appFont);
+    font-size: var(--fontSize);
+    font-weight: var(--fontWeight);
   }
   #header {
-    order: 1;
-    flex: 0 100%;
-    max-height: 60px;
     box-sizing: border-box;
-    padding-bottom: var(--headerpadding);
-    padding-top: var(--headerpadding);
-    line-height: var(--headerlineheight);
-    font-size: var(--headerfontsize);
-    font-weight: var(--headerfontweight);
+    width: 100%;
     background-color: var(--primary);
-    color: var(--onprimary);
-  }
-  #footer {
-    order: 4;
-    flex: 0 100%;
-    max-height: 32px;
-    box-sizing: border-box;
-    padding: var(--footerpadding);
-    line-height: var(--footerlineheight);
-    font-size: var(--footerfontsize);
-    background-color: var(--primarylight);    
-    color: var(--onprimarylight);
+    color: var(--onPrimary);
+    font-size: var(--fontSizeBig);
+    font-weight: var(--fontWeightHeavy);
+    padding: var(--gutter);
   }
   #nav {
-    order: 3;
-    flex: 0 auto;
     box-sizing: border-box;
-    height: 100%;
-    padding: var(--navpadding);
-  } 
-  #main {
-    flex: 1 0px;
-    order: 2;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 0px;
-  }
-  #mainflex {
-    display: flex;
-    flex-direction: column;
-    padding: var(--gutterwidth);
-  }
-  #article {
-    background-color: var(--background);
-    color: var(--onbackground);
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: auto; 
-  }
-  #embed {
-    background-color: var(--surface);
-    color: var(--onsurface);
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: auto; 
-  }
-  .rollup {
-    background-color: var(--surface);
-    color: var(--onsurface);
-  }
-  h1 {
-    margin: 0px;
-    padding-top: var(--h1padding);
-    padding-bottom: var(--h1padding);
-    line-height: 1;
-    font-size: var(--h1fontsize);
-    font-weight: var(--h1fontweight);
-  }
-  h2 {
-    margin: 0px;
-    font-size: var(--h2fontsize);
-    font-weight: var(--h3fontweight);
-  }
- 
-  .collapsible {
-    box-sizing: border-box;
-    font-size: var(--h3fontsize);
-    font-weight: var(--h3fontweight);
-    text-align: left;
-    border: none;
     width: 100%;
-    margin-top: var(--gutterwidth);
-    margin-bottom: 0px;
-    padding: var(--collapsiblepadding);
-
+    background-color: var(--surface);
+    margin-top: var(--gutter);
+    padding-bottom: var(--gutter);
   }
-  .collapsible:hover {
-    background-color: var(--secondary);
-    color: var(--onsecondary);
-  }
-
-  .collapsed {
-    background-color: var(--secondarylight);
-    color: var(--onsecondarylight);
-  }
-
-  .expanded {
-    background-color: var(--secondary);
-    color: var(--onsecondary);
-  }
-    
-  .collapsed:after {
-    content: "&#9660;"; 
-    float: right;
-  }
-
-  .expanded:after {
-    content: "&#9650;"; 
-    float: right;
-  }
-
-  /* 
-  #togglestackblitz {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    border: none;
+  #main {    
     box-sizing: border-box;
-    border-radius: 4px;
-    margin: 8px;
-    padding: 12px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    opacity: 1;
-
-    box-shadow: 4px 4px var(--surface);
-    background-color: var(--secondarylight);
-    color: var(--onsecondarylight);
-    
-    
-  } 
-  #togglestackblitz:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    box-shadow: none;
+    padding: var(--gutter);
+    min-height: 300px;
   }
-
-  #togglestackblitz:hover {
-  } 
-  #togglestackblitz:active {
-  } 
-  #togglestackblitz:focus {
-  } 
-  */
-  /* 
-  #togglestackblitz:disabled {
-    height: 50px;
-    border: none;
-    background-color: var(--primarydark);
-    color: var(--onprimarylight);
-    font-size: 16px;
-  } */
-  @media(min-width: 600px){
-    :host {
-      flex-flow: row wrap;
+    #categoryheading {
+      font-size: var(--fontSizeBig);
+      font-weight: var(--fontWeightHeaviest);
     }
-    #nav {
-      order: 2;
-      flex-grow: 0;
-      flex-shrink: 2;
-      flex-basis: 300px;
+    #projectheading {
+      font-size: var(--fontSize);
+      font-weight: var(--fontWeightHeaviest);
+      padding-top: var(--gutter);
     }
-    #main {
-      order: 3;
-      flex-grow: 6;
-      flex-shrink: 0;
-      flex-basis: 0px;
+    .toggle {
+      box-sizing: border-box;
+      font-size: var(--fontSize);
+      font-weight: var(--fontWeight);
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;      
+      padding: var(--gutter);
+      margin-top: var(--gutter);
     }
-
-  } 
+    .expanded {
+      background-color: var(--secondary);
+      color: var(--onSecondary);
+    }
+    .collapsed {
+      background-color: var(--secondaryLight);
+      color: var(--onSecondaryLight);
+      margin-bottom: var(--gutter);
+    }
+    .toggle:hover {
+      background-color: var(--secondary);
+      color: var(--onSecondary);
+    }
+    .error {
+      background-color: var(--error);
+      color: var(--onError);
+    }
+    .toggle:disabled {
+      background-color: var(--secondaryLight);
+      color: var(--onSecondaryLight);
+      opacity: 0.55;
+    }
+    .spacer {
+      font-family: Roboto Mono, monospace;
+    }
+  #footer {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: var(--gutter);
+    padding: var(--gutter);
+  }
 `;
 
-
-/* Encapsulated styles for my-header */
-export const myheader = html`
-  ${hostdisplay}
-  ${nomargins}
-  ${borderbox}
-  #menu {
-    padding: ${special.headerpadding}px;
-    text-decoration: none;
-  }
-}
-`
-
-/* Encapsulated styles for my-nav */
-export const mynav = html`
-  ${hostdisplay}
-  ${nomargins}
-  ${borderbox}
-
-  #navcategorylist {
-    box-sizing: border-box;
+/**
+ * Encapsulated styles for the nav-bar element.
+ * @constant {TemplateResult} navBarStyles
+ */
+export const navBarStyles = html`
+  ${hostDisplay}
+  ul {
     list-style-type: none;
-    padding: var(--navpadding);
     margin: 0px;
+    padding: 0px;
   }
-
-  .navitemlist {
-    box-sizing: border-box;
-    list-style-type: none;
-    padding: var(--navitemlistpadding);
+  li {
+    padding: var(--gutter);
   }
-
-  .navcategory {
-    box-sizing: border-box;
-    cursor: pointer;
-    
-    padding-left: var(--navcategorypadding);
-    padding-top: var(--navcategorypadding);
-    padding-bottom: var(--navcategorypadding);
-    padding-right: 0px;
-
-
-    line-height: var(--navcategorylineheight);
-    font-size: var(--navcategoryfontsize);
-    font-weight: var(--navcategoryfontweight);
-  }
-  
   .navitem {
-    box-sizing: border-box;
-    line-height: var(--navitemlineheight);
-    font-size: var(--navitemfontsize);
-    padding: var(--navitempadding);
-    cursor: pointer;
-    border: none;
+    padding-top: var(--gutter);
+    padding-left: var(--gutter6);
   }
-  
+  .navcategory {
+    padding: var(--gutter);
+  }
+  .selected {
+    color: var(--primaryLight);
+    font-weight: var(--fontWeightHeaviest);
+  }
+  .navitem:hover {
+    color: var(--primaryLight);
+  }
+  .spacer {
+    font-family: Roboto Mono, monospace;
+  }
+`;
 
-  .selectednavitem {
-    font-weight: bold;
-  }
-}`
-
-/* Encapsulated styles for stackblitz-container */
-export const stackblitzcontainer = html`
-  ${hostdisplay}
-  ${nomargins}
-  ${borderbox}
-  :host {
-    background-color: var(--surface);
-    color: var(--onsurface);
-    height: 100%;
-  }
+/**
+ * Encapsulated styles for the readme-container element.
+ * @constant {TemplateResult} readmeContainerStyles
+ */
+export const readmeContainerStyles = html`
+  ${hostDisplay}
   iframe {
-    box-sizing: borderbox;
-    margins: 0px;
-    padding: 0px;
     border: none;
+    width: 100%;
+    
   }
-}`
+`;
 
-export const readmedisplay = html`
-  ${hostdisplay}
-  ${nomargins}
-  ${borderbox}
+/**
+ * Encapsulated styles for the stackblitz-container element.
+ * @constant {TemplateResult} stackblitzContainerStyles
+ */
+export const stackblitzContainerStyles = html`
+  ${hostDisplay}
   iframe {
-    box-sizing: borderbox;
-    margins: 0px;
-    padding: 0px;
     border: none;
+    width: 100%;
+    background-color: var(--secondary);
   }
 `;
