@@ -52,7 +52,7 @@ class StackblitzContainer extends LitElement{
      */
     this.addEventListener('project-changed', (e) => { 
       this.projectId = e.detail;
-      this.loadProject(1).then(console.log('loaded project'));
+      this.loadProject(1);
     });
   }
 
