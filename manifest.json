@@ -2,7 +2,7 @@
   "description": "lit-element docs",
   "manifest_version": 1,
   "name": "lit-element docs",
-  "short_name": "lit-element-docs",
+  "short_name": "lit-element",
   "version": "1.0",
   "start_url": ".",
   "display": "fullscreen",
