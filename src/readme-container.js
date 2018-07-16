@@ -2,35 +2,49 @@
 import { LitElement, html } from '@polymer/lit-element';
 // Import encapsulated styles for the readme-container.
 import { readmeContainerStyles } from './app-styles.js';
+// Import lit-html in order to use the TemplateResult class.
+import * as Lit from 'lit-html';
+// Import Prism.js library in order to perform code highlighting.
+import 'prismjs';
 
 /**
- * readme-container element displays an iframe with the README file of the 
- * active project. Currently the iframe is populated by an HTML document, 
- * which is converted from the project's README.md during the build process.
+ * readme-container element displays the README file of the active project. 
+ * Currently it uses an iframe populated with an HTML document, 
+ * which is generated from the project's README.md during the build process.
  */
-class ReadmeContainer extends LitElement{
+export class ReadmeContainer extends LitElement{
   static get properties(){
     return {
-      // Active project, supplied by the app shell.
-      projectId: String
+      // HTML of the readme to display, supplied by app shell.
+      readme: String,
     };
   }
 
   /**
-   * Render an iframe whose source is README.html in the folder containing 
-   * the active project.
-   * 
-   * Work out the height of the iframe based on the height of the viewport.
-   * Factor in the space taken by other UI components on the page.
+   * Highlight code blocks in shadow DOM using prismjs API.
    */
-  _render({projectId}){
-    var h = (Math.max(document.documentElement.clientHeight, window.innerHeight || 0))-176;
+  async highlightCodeBlocks(){
+    Prism.highlightAllUnder(this.shadowRoot);
+  }
+
+  /**
+   * Apply encapsulated styles for the readme-container element.
+   * Use lit-html to convert readme string to a TemplateResult.
+   */
+  _render({readme}){
     return html`
       <style>
         ${readmeContainerStyles}
       </style>
-      <iframe height=${h} id="readme" src="src/samples/${projectId}/README.html"></iframe>
+      ${new Lit.TemplateResult([readme], '', 'html')}
     `;
+  }
+
+  /**
+   * After each render, call a function to highlight code blocks. 
+   */
+  _didRender(){
+    this.highlightCodeBlocks();
   }
 }
 

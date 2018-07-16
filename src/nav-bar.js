@@ -8,19 +8,19 @@ import { navBarStyles } from './app-styles.js';
 /**
  * The nav-bar element draws a menu with projects in category dropdowns.
  * 
- * Nav bar receives the menu state (i.e. which menus are expanded/collapsed
- * and which project and category are active) from the app shell. Nav bar makes
- * no changes to app state. 
+ * Nav bar receives state (including which menus are expanded/collapsed 
+ * and which project and category are active) from the app shell. 
+ * Nav bar makes no changes to app state. 
  * 
  * When the user clicks a menu option, the nav bar fires an event with the 
  * details of what was clicked.
  * 
- * The app shell listens for the events and performs the actual updates.
+ * App shell listens for the events and changes the state accordingly.
  */
 class NavBar extends LitElement {
   static get properties(){
     return {
-      // Project and category data.
+      // Project and category data. 
       content: Object,
       // Current app state.
       state: Object

@@ -1,93 +1,18 @@
+/**
+ * Export styles for app shell and UI components.
+ * 
+ * All exports are lit-html TemplateResults.
+ * 
+ * - hostDisplay: Basic custom element display rules.
+ * - appShellStyles: Encapsulated styles for app shell.
+ * - navBarStyles: Encapsulated styles for the nav-bar element.
+ * - prismCss: Prism.js styles for code highlighting. By Lea Verou.
+ * - readmeContainerStyles: Encapsulated styles for readme-container element.
+ * - stackblitzContainerStyles: Encapsulated styles for stackblitz-container.
+ */
+
+// Import lit-html html function to create TemplateResults.
 import { html } from 'lit-html/lib/lit-extended';
-
-/**
- * App theme part 1: Color definitions. 
- * Names and uses of colors are based on the {@link https://material.io/design/color/the-color-system.html#color-theme-creation Material Design color system }.
- * @constant {TemplateResult} colorProps
- */
-export const colorProps = html`
-    :host {
-      --primary: #512da8;
-      --primaryLight: #8559da;
-      --primaryDark: #130078;
-      
-      --onPrimary: #FFFFFF;
-      --onPrimaryLight: #FFFFFF;
-      --onPrimaryDark: #FFFFFF;
-
-      --secondary: #353535;
-      --secondaryLight: #5d5d5d;
-      --secondaryDark: #0f0f0f;
-
-      --onSecondary: #FFFFFF;
-      --onSecondaryLight: #FFFFFF;
-      --onSecondaryDark: #efefef;
-      
-      --background: #FFFFFF;
-      --surface: #efefef;
-      --error: #b00020;
-
-      --onBackground: #353535;
-      --onSurface: #000000;
-      --onError: #FFFFFF;      
-    }
-  `;
-
-/**
- * App theme part 2: Typography. 
- * @constant {TemplateResult} typographyProps
- */
-export const typographyProps = html`
-  :host {
-    --appFont: Roboto, sans-serif;
-    
-    --fontSize: 16px;
-    --fontSizeBig: 18px;
-    --fontSizeBiggest: 20px;
-
-    --fontWeight: 350;
-    --fontWeightHeavy: 400;
-    --fontWeightHeaviest: 450;
-  }
-`;
-
-/**
- * App theme part 3: Layout and spacing. 
- * @constant {TemplateResult} layoutProps
- */
-export const layoutProps = html`
-  :host {
-    --gutter: 8px; 
-    /*  
-      --gutter2: 16px;
-      --gutter3: 24px;
-      --gutter4: 32px;
-      --gutter5: 40px; 
-    */
-    --gutter6: 48px; 
-  }
-
-  /* 
-  @media(min-width: 600px){
-    :host {
-      display: flex;
-      flex-flow: row wrap;
-    }
-    #header{
-
-    }
-    #nav{
-
-    }
-    #main{
-
-    }
-    #footer{
-
-    }
-  }
-  */
-`;
 
 /**
  * CSS rules for basic custom element display.
@@ -111,9 +36,6 @@ export const hostDisplay = html`
  */
 export const appShellStyles = html`
   ${hostDisplay}
-  ${colorProps}
-  ${typographyProps}
-  ${layoutProps}
   :host {
     font-family: var(--appFont);
     font-size: var(--fontSize);
@@ -126,12 +48,14 @@ export const appShellStyles = html`
     color: var(--onPrimary);
     font-size: var(--fontSizeBig);
     font-weight: var(--fontWeightHeavy);
+    line-height: var(--gutter3);
     padding: var(--gutter);
+    max-height: var(--gutter5);
   }
   #nav {
     box-sizing: border-box;
     width: 100%;
-    background-color: var(--surface);
+    background-color: var(--secondaryLight);
     margin-top: var(--gutter);
     padding-bottom: var(--gutter);
   }
@@ -140,56 +64,89 @@ export const appShellStyles = html`
     padding: var(--gutter);
     min-height: 300px;
   }
-    #categoryheading {
-      font-size: var(--fontSizeBig);
-      font-weight: var(--fontWeightHeaviest);
-    }
-    #projectheading {
-      font-size: var(--fontSize);
-      font-weight: var(--fontWeightHeaviest);
-      padding-top: var(--gutter);
-    }
-    .toggle {
-      box-sizing: border-box;
-      font-size: var(--fontSize);
-      font-weight: var(--fontWeight);
-      width: 100%;
-      text-align: left;
-      border: none;
-      outline: none;      
-      padding: var(--gutter);
-      margin-top: var(--gutter);
-    }
-    .expanded {
-      background-color: var(--secondary);
-      color: var(--onSecondary);
-    }
-    .collapsed {
-      background-color: var(--secondaryLight);
-      color: var(--onSecondaryLight);
-      margin-bottom: var(--gutter);
-    }
-    .toggle:hover {
-      background-color: var(--secondary);
-      color: var(--onSecondary);
-    }
-    .error {
-      background-color: var(--error);
-      color: var(--onError);
-    }
-    .toggle:disabled {
-      background-color: var(--secondaryLight);
-      color: var(--onSecondaryLight);
-      opacity: 0.55;
-    }
-    .spacer {
-      font-family: Roboto Mono, monospace;
-    }
+  #categoryheading {
+    font-size: var(--fontSizeBiggest);
+    font-weight: var(--fontWeightHeaviest);
+    padding-top: var(--gutter2);
+  }
+  #projectheading {
+    font-size: var(--fontSize);
+    font-weight: var(--fontWeightHeaviest);
+    padding-top: var(--gutter);
+  }
+  #breadcrumbs {
+    font-size: var(--fontSizeSmall);
+    font-weight: var(--fontWeightLight);
+  }
+  .toggle {
+    box-sizing: border-box;
+    font-size: var(--fontSize);
+    font-weight: var(--fontWeight);
+    width: 100%;
+    text-align: left;
+    line-height: var(--gutter3);
+    border: none;
+    outline: none;      
+    padding: var(--gutter);
+    margin-top: var(--gutter);
+  }
+  .expanded {
+    background-color: var(--secondaryDark);
+    color: var(--onSecondaryDark);
+  }
+  .collapsed {
+    background-color: var(--secondary);
+    color: var(--onSecondary);
+    margin-bottom: var(--gutter);
+  }
+  .toggle:hover {
+    background-color: var(--secondaryDark);
+    color: var(--onSecondary);
+  }
+  .error {
+    background-color: var(--error);
+    color: var(--onError);
+  }
+  .toggle:disabled {
+    background-color: var(--secondary);
+    color: var(--onSecondary);
+    opacity: 0.55;
+  }
+  .spacer {
+    font-family: Roboto Mono, monospace;
+  }
   #footer {
     box-sizing: border-box;
     width: 100%;
     margin-top: var(--gutter);
     padding: var(--gutter);
+    font-size: var(--fontSizeSmallest);
+  }
+
+  @media(min-width: 900px){
+    :host {
+      display: flex;
+      flex-flow: row wrap;
+      align-content: flex-start;
+    }
+    #header{
+      order: 1;
+      flex: 0 100%;
+    }
+    #main{
+      order: 3;
+      flex: 1 0px;
+    }
+    #nav{
+      margin-top: 0px;
+      order: 2;
+      flex: 0 30%;
+      max-width: 25%;
+    }   
+    #footer{
+      order: 4;
+      flex: 0 100%;
+    }
   }
 `;
 
@@ -199,6 +156,9 @@ export const appShellStyles = html`
  */
 export const navBarStyles = html`
   ${hostDisplay}
+  :host {
+    height: 100%;
+  }
   ul {
     list-style-type: none;
     margin: 0px;
@@ -209,10 +169,10 @@ export const navBarStyles = html`
   }
   .navitem {
     padding-top: var(--gutter);
-    padding-left: var(--gutter6);
+    padding-left: var(--gutter3);
   }
   .navcategory {
-    padding: var(--gutter);
+    padding-bottom: var(--gutter);
   }
   .selected {
     color: var(--primaryLight);
@@ -223,6 +183,154 @@ export const navBarStyles = html`
   }
   .spacer {
     font-family: Roboto Mono, monospace;
+    font-size: var(--fontSizeSmallest)
+  }
+`;
+
+/**
+ * Styles for code highlighting.
+ * @constant {TemplateResult} prismCss
+ */
+
+/** PrismJS 1.15.0 */
+/** https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+* prism.js default theme for JavaScript, CSS and HTML
+* Based on dabblet (http://dabblet.com)
+* @author Lea Verou
+*/
+export const prismCss = html`
+  code[class*="language-"],
+  pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Roboto Mono, Consolas, monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+  code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background: #b3d4fc;
+  }
+
+  pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+  code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+  }
+
+  @media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+      text-shadow: none;
+    }
+  }
+
+  /* Code blocks */
+  pre[class*="language-"] {
+    padding: 1em;
+    margin: 0em 0;
+    overflow: auto;
+  }
+
+  :not(pre) > code[class*="language-"],
+  pre[class*="language-"] {
+    background: #efefef;
+  }
+
+  /* Inline code */
+  :not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: slategray;
+  }
+
+  .token.punctuation {
+    color: #999;
+  }
+
+  .namespace {
+    opacity: .7;
+  }
+
+  .token.property,
+  .token.tag,
+  .token.boolean,
+  .token.number,
+  .token.constant,
+  .token.symbol,
+  .token.deleted {
+    color: #905;
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.inserted {
+    color: #690;
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword {
+    color: #07a;
+  }
+
+  .token.function,
+  .token.class-name {
+    color: #DD4A68;
+  }
+
+  .token.regex,
+  .token.important,
+  .token.variable {
+    color: #e90;
+  }
+
+  .token.important,
+  .token.bold {
+    font-weight: bold;
+  }
+  .token.italic {
+    font-style: italic;
+  }
+
+  .token.entity {
+    cursor: help;
   }
 `;
 
@@ -232,10 +340,45 @@ export const navBarStyles = html`
  */
 export const readmeContainerStyles = html`
   ${hostDisplay}
-  iframe {
+  ${prismCss}
+  :host {
     border: none;
     width: 100%;
-    
+  }
+  h2 {
+    font-size: var(--fontSize);
+    font-weight: var(--fontWeightHeaviest);
+    border-bottom: 1px solid var(--secondaryDark);
+    margin: 0;
+    padding-top: var(--gutter4);
+    padding-bottom: var(--gutterHalf);
+  }
+  h3 {
+    font-size: var(--fontSize);
+    font-weight: var(--fontWeightHeavy);
+    margin: 0;
+  }
+  pre {
+    font-size: var(--fontSizeSmall);
+    font-family: var(--appFontMono);
+    background-color: var(--secondaryLight);
+  }
+  ul {
+    margin: 0;
+    margin-top: var(--gutter);
+  }
+  p, ul > li {
+    line-height: var(--gutter3);
+  }
+  code {
+    font-family: var(--appFontMono);
+    background-color: var(--secondaryLight);
+  }
+  a {
+    color: var(--primary);
+  }
+  a:visited {
+    color: var(--primaryLight);
   }
 `;
 
@@ -248,6 +391,6 @@ export const stackblitzContainerStyles = html`
   iframe {
     border: none;
     width: 100%;
-    background-color: var(--secondary);
+    background-color: var(--secondaryDark);
   }
 `;

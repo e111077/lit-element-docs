@@ -3,14 +3,19 @@
   "moduleResolution": "node",
   "shell": "src/app-shell.js",
   "entrypoint": "index.html",
-  "sources": ["src/**"],
-  "builds": [
-    {
-      "name": "test",
-      "preset": "uncompiled-unbundled",
-      "js": {"minify": true},
-      "html": {"minify": true},
-      "css": {"minify": true}
-    }
+  "sources": ["src/**", "manifest/**", "manifest.json"],
+  "extraDependencies": [
+    "samples/**", 
+    "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"
+  ],
+  "builds": [{
+    "name": "test",
+    "preset": "uncompiled-unbundled",
+    "js": {"minify": true},
+    "html": {"minify": true},
+    "css": {"minify": true}
+  },{
+    "preset": "es6-unbundled"
+  }
   ]
 }

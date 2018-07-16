@@ -1,0 +1,53 @@
+/** 
+ * App theme. A set of custom properties defining UI colors and typography. 
+ * 
+ * Color names and uses are based on material.io color scheme.
+ */
+html {
+  --primary: #512da8;
+  --primaryLight: #8559da;
+  --primaryDark: #130078;
+  
+  --onPrimary: #FFFFFF;
+  --onPrimaryLight: #FFFFFF;
+  --onPrimaryDark: #FFFFFF;
+
+  --secondary: #5d5d5d;
+  --secondaryLight: #efefef;
+  --secondaryDark: #353535;
+
+  --onSecondary: #FFFFFF;
+  --onSecondaryLight: #FFFFFF;
+  --onSecondaryDark: #FFFFFF;
+  
+  --background: #FFFFFF;
+  --surface: #efefef;
+  --error: #b00020;
+
+  --onBackground: #000000;
+  --onSurface: #000000;
+  --onError: #FFFFFF;    
+
+  --appFont: Roboto, sans-serif;
+  --appFontMono: Roboto Mono, Consolas, monospace;
+
+  --fontSizeSmallest: 12px;
+  --fontSizeSmall: 14px;
+  --fontSize: 16px;
+  --fontSizeBig: 18px;
+  --fontSizeBiggest: 20px;
+
+  --fontWeightLightest: 250;
+  --fontWeightLight: 300;
+  --fontWeight: 350;
+  --fontWeightHeavy: 400;
+  --fontWeightHeaviest: 450;
+
+  --gutterHalf: 4px;
+  --gutter: 8px;       
+  --gutter2: 16px;
+  --gutter3: 24px;
+  --gutter4: 32px;
+  --gutter5: 40px; 
+  --gutter6: 48px;
+}

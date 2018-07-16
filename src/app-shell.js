@@ -1,42 +1,47 @@
-// Import lit-element base class and function to create TemplateResults.
+// Import lit-element base class.
+// Import html helper function to create TemplateResults.
 import { LitElement, html } from '@polymer/lit-element';
 
-// Import content, styles and state.
-import { xcategories, xprojects, xprojectsToCategories } from './content.js';
-import { appShellStyles } from './app-styles.js';
-import * as State from './state.js';
+// Import content and state.
+import { xcategories, xprojects, xprojectsToCategories } from './app-content';
+import { readmes } from './_readmes.js';
+import * as State from './app-state';
 
 // Import UI components.
 import './nav-bar.js';
 import './stackblitz-container.js';
 import './readme-container.js';
 
+// Import encapsulated styles for app-shell. 
+import { appShellStyles } from './app-styles';
+
 /**
- * app-shell element defines app layout, loads UI components, and manages
- * state. Only app-shell can change state. UI components fire 
- * events with details of changes; app-shell makes the changes.
+ * app-shell element.
+ * 
+ * Define app layout, load UI components, and manage state. 
+ * Only the app shell changes the app state. 
+ * 
+ * UI components fire events with details of changes; 
+ * app-shell makes the changes.
  */
 export class AppShell extends LitElement {
   static get properties() {
     /**
-     * content: Object with project and category data. See src/content.js.
-     * styles: Object with app theme. See src/styles.js.
-     * state: Object with current app state. See src/state.js.
+     * content: Object with project and category data. See app-content.js.
+     * state: Object with current app state. See app-state.js.
      */
     return {
       content: Object,
-      styles: Object,
       state: Object
     };
   }
   
   /** 
-   * Get app content, styles and initial state.
+   * Get app content and initial state.
    */
   constructor() {
     super();
     this.content = this.getContent();
-    this.styles=this.getStyles();
     this.state=this.getState();
   }
 
@@ -49,24 +54,30 @@ export class AppShell extends LitElement {
       projects: xprojects,
       projectsToCategories: xprojectsToCategories,
       headerText: 'lit-element documentation',
-      footerText: '© 2018 The Polymer Team'
-    });
-  }
-
-  /** 
-   * Get app styles.
-   */
-  getStyles(){
-    return Object.assign({}, {
-      appShell: appShellStyles
+      footerText: '© 2018 The Polymer Team',
+      readmes: readmes
     });
   }
   
   /** 
-   * Get initial app state.
+   * Create initial app state.
    */
   getState() {
-    return Object.assign({}, State.startState);
+    var startState = {
+      // Active project id.
+      activeProject: 'xcreateelement',
+      // Id of the category containing the active project.
+      activeCategory: 'xbasics',
+      // An object denoting expanded categories, keyed by category id.
+      expandedCategories: { xbasics: true },  
+      // An object denoting expanded content elements, keyed by element id.
+      expandedContent: { readme: true, embed: false },
+      // Whether the active project's embedded code sample is ready to view.
+      embedReady: false,
+      // Whether the app is currently in an error state.
+      errorState: false
+    };
+    return Object.assign({}, startState);
   }
 
   /** 
@@ -89,24 +100,25 @@ export class AppShell extends LitElement {
       ), 
       State.changeCategory(this.content.projectsToCategories[project])
     );
-    
     var embed = this.shadowRoot.getElementById('embed');
     embed.dispatchEvent(new CustomEvent('project-changed', { detail: project }));
   }
 
   /** 
-   * Expand or collapse a nav category.
+   * Update app state to expand or collapse a nav category.
    */
   toggleCategoryVisibility(category){
-    var expanded = this.state.expandedCategories[category];
+    var isExpanded = this.state.expandedCategories[category];
     this.state = State.changeState(
       this.state,
-      State.updateCategoryVisibility(category, !expanded)
+      State.updateCategoryVisibility(category, !isExpanded)
     );
   }
 
   /** 
-   * Expand or collapse embedded stackblitz or readme. 
+   * Update app state to expand or collapse a UI component. 
+   * Apart from nav menu categories, currently only the 
+   * stackblitz-container is expandible/collapsible.
    */
   toggleContentVisibility(id){
     var expanded = this.state.expandedContent[id];
@@ -117,34 +129,21 @@ export class AppShell extends LitElement {
   }
 
   /** 
-   * Render UI components based on content, styles, and app state.
+   * Render UI and components, based on app content and state.
    */
-  _render({content, styles, state}) {
+  _render({content, state}) {
     return html`
       <style>
-        ${styles.appShell}
+        ${appShellStyles}
       </style>
       <header id="header"><div>${content.headerText}</div></header>
       <main id="main">
-      <div id="categoryheading">${content.categories[state.activeCategory].name}</div>
+        <div id="breadcrumbs">
+          ${content.categories[state.activeCategory].name} > 
+          ${content.projects[state.activeProject].name}
+        </div>
+        <div id="categoryheading">${content.categories[state.activeCategory].name}</div>
         <div id="projectheading">${content.projects[state.activeProject].name}</div>
-        <button 
-          class$="${state.expandedContent.readme?'toggle expanded':'toggle collapsed'}"
-          value="readme"
-          on-click="${(e) => this.toggleContentVisibility(e.target.value)}">
-          <span class="spacer">
-            ${state.expandedContent.readme?
-              '∨':  // expanded 
-              '>'   // collapsed
-            }
-          </span>
-          Documentation
-        </button>
-        <readme-container
-          id="readme"
-          hidden?="${!state.expandedContent.readme}" 
-          projectId="${state.activeProject}">
-        </readme-container>
         <button 
           class$="${
             state.errorState?
@@ -169,21 +168,29 @@ export class AppShell extends LitElement {
           ${!state.errorState?
             state.embedReady?
               state.expandedContent.embed?
-                'Code sample'             // ready && non-error && expanded 
-                :'Code sample'            // ready && non-error && collapsed 
-              :'Code sample loading'      // loading && non-error
-            :'Error loading code sample'  // error state
+                'Live code sample'                        // ready && non-error && expanded 
+                :'Live code sample'                       // ready && non-error && collapsed 
+              :':Loading live code sample...'             // loading && non-error
+            :'Error loading embedded StackBlitz project'  // error state
           }
         </button>
+        
         <stackblitz-container 
           id="embed"
           projectId="${state.activeProject}"
           hidden?="${!state.expandedContent.embed}">
         </stackblitz-container>
+
+        <readme-container
+          id="readme"
+          readme="${content.readmes[state.activeProject]}">
+        </readme-container>
       </main>
-      <nav id="nav">
+
+      <nav id="nav" >
         <nav-bar role="navigation" id="navbar" content=${content} state=${state}></nav-bar>
       </nav>
+
       <footer id="footer">${content.footerText}</footer>
     `;
   }
@@ -209,13 +216,21 @@ export class AppShell extends LitElement {
       );
     });
     embed.addEventListener('error-state', (e) => {
-      this.state = State.changeState(
-        State.changeState(
-          this.state, 
-          State.updateContentVisibility('embed', false)
-        ),
-        State.updateErrorState(e.detail)
-      );
+      console.log(e);
+        
+      /** 
+       * TODO: Usability with this error checking really sucked, 
+       * need a different way. Until then, just log the error
+       * to the console.
+       * 
+       * this.state = State.changeState(
+       * State.changeState(
+       *   this.state, 
+       *   State.updateContentVisibility('embed', false)
+       * ),
+       * State.updateErrorState(true)
+       * ); 
+       **/
     });
   }
 }

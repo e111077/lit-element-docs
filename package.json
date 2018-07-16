@@ -1,10 +1,20 @@
 {
   "name": "lit-element-docs",
   "description": "lit-element documentation",
+  "version": "1.0.0",
   "dependencies": {
     "@polymer/lit-element": "latest",
-    "@webcomponents/webcomponentsjs": "latest",
-    "@stackblitz/sdk": "^1.2.0"
+    "lit-html": "latest",
+    "prismjs": "latest",
+    "@stackblitz/sdk": "^1.2.0",
+    "@webcomponents/webcomponentsjs": "latest"
   },
-  "version": "1.0.0"
+  "dev-dependencies": {
+    "showdown": "^1.8.6",
+    "polymer-cli": "latest"
+  },
+  "engines": 
+  { 
+    "node" : ">=10.6.0" 
+  }
 }

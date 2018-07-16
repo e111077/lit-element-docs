@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  
+  <script src="./otherStuff.js"></script>
+  <script src="./custom-element-pure.js" type="module"></script>
+  <script src="./custom-element.js" type="module"></script>
+
+  <title>lit-element code sample</title>
+
+</head>
+<body>
+  <h3>Do</h3>
+  <script>
+  var doThis = document.getElementById('do');
+  var myPureDiv = document.getElementById('mypurediv');
+
+  doThis.addEventListener('receive-random', (e)=>receiveRandom(e));
+  
+  function requestRandom(e){ 
+    e.target.dispatchEvent(new CustomEvent('request-random', {
+      detail: {requestInfo: 'request info'}
+    }));
+  }
+
+  function receiveRandom(e){ 
+    console.log(e.detail.requestInfo);
+    myPureDiv.innerHTML = "Received random: " + e.detail.random
+    e.target.dispatchEvent(new CustomEvent('request-random', {
+      detail: {requestInfo: 'request info'}
+    }));
+  }
+
+  </script>
+  <div id="mypurediv"></div>
+  <hr/>
+  <custom-element-pure></custom-element-pure>
+
+  <h3>Don't Do</h3>
+  <div id="mydiv">Some content in a div. Click me.</div>
+  <hr/>
+  <custom-element id="dont"></custom-element>
+</body>
