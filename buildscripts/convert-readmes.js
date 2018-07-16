@@ -6,7 +6,7 @@ const showdown  = require('showdown');
 var converter = new showdown.Converter();
 
 // Set up parameters for reading files and folders
-var dir = '../samples';
+var dir = 'samples';
 var options = {encoding: 'utf8'};
 
 /**
@@ -86,7 +86,7 @@ var convertedReadmes =
  * projectId. 
  */
 convertedReadmes.then((result)=> {
-  fsPromises.writeFile('../src/_readmes.js', "export const readmes = " + JSON.stringify(result)).then(console.log('Wrote _readmes.js'));
+  fsPromises.writeFile('src/_readmes.js', "export const readmes = " + JSON.stringify(result)).then(console.log('Wrote _readmes.js'));
 }).catch((error)=>{
   console.log('Could not convert readmes. Error:', error);
 });

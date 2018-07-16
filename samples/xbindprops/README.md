@@ -21,7 +21,8 @@ In HTML, do:
 <custom-element myProp="value of myProp"></custom-element>
 ```
 
-Note that lit-element **does not** transform `camelCase` properties to `dash-case`. 
+Note that lit-element **does not** transform `camelCase` properties to
+`dash-case`. 
 
 **custom-element.js**
 
@@ -56,6 +57,7 @@ _render({url, altText, imgWidth}){
 ```html
 <custom-element
   url="https://thecatapi.com/api/images/get?id=4of"
-  altText="A gif of an adult cheetah popping her head up from a bunch of cheetah cubs.">
+  altText="A gif of an adult cheetah popping her head up from a bunch of
+  cheetah cubs.">
 </custom-element>
 ```

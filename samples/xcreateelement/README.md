@@ -5,7 +5,8 @@
 ## Write your custom element class
 
 * Import the `LitElement` base class and the `html` helper function. 
-* Extend the `LitElement` base class to create a class for your new custom element.
+* Extend the `LitElement` base class to create a class for your new custom
+  element.
 * Define your element's properties.
 * Define your element's template.
 * Register the custom element with the browser.
@@ -41,7 +42,8 @@ customElements.define('custom-element', CustomElement);
 
 ## Use your custom element in an HTML document
 
-Import and use your custom element in an HTML document. Include the [WebComponents polyfills](https://github.com/webcomponents/webcomponentsjs) for browser compatibility.
+Import and use your custom element in an HTML document. Include the
+[WebComponents polyfills](https://github.com/webcomponents/webcomponentsjs) for browser compatibility.
 
 **index.html**
 

@@ -97,7 +97,7 @@ class StackblitzContainer extends LitElement{
    * TODO: Clean this up.
    */
   _getFile(filename, filetype){
-    var url = 'src/samples/' + this.projectId + '/' + filename;
+    var url = 'samples/' + this.projectId + '/' + filename;
     return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
       xhr.responseType = filetype;
