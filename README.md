@@ -1,5 +1,9 @@
 # [lit-element-docs](https://github.com/katejeffreys/lit-element-docs)
 
+**Work in progress**
+
+https://lit-element-docs.firebaseapp.com/ 
+
 ## Run locally  
 
 Requires Node 10+ because of `fsPromises` used in buildscripts/convert-markdown.js.
