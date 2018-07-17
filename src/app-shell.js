@@ -170,7 +170,7 @@ export class AppShell extends LitElement {
               state.expandedContent.embed?
                 'Live code sample'                        // ready && non-error && expanded 
                 :'Live code sample'                       // ready && non-error && collapsed 
-              :':Loading live code sample...'             // loading && non-error
+              :'Loading live code sample...'             // loading && non-error
             :'Error loading embedded StackBlitz project'  // error state
           }
         </button>

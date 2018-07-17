@@ -6,16 +6,41 @@
   "sources": ["src/**", "manifest/**", "manifest.json"],
   "extraDependencies": [
     "samples/**", 
-    "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"
+    "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
+    "node_modules/@webcomponents/webcomponentsjs/bundles/**"
   ],
   "builds": [{
     "name": "test",
     "preset": "uncompiled-unbundled",
-    "js": {"minify": true},
-    "html": {"minify": true},
+    "js": { 
+      "minify": { 
+        "exclude": ["samples/**"] 
+      },
+      "compile": {      
+        "exclude": ["samples/**"]   
+      }
+    },
+    "html": { 
+      "minify": { 
+        "exclude": ["samples/**"] 
+      }
+    },
     "css": {"minify": true}
   },{
-    "preset": "es6-unbundled"
-  }
-  ]
+    "preset": "es6-unbundled",
+    "js": { 
+      "minify": { 
+        "exclude": ["samples/**"] 
+      },
+      "compile": {
+        "target": "es2015",
+        "exclude": ["samples/**"]
+      }
+    },
+    "html": { 
+      "minify": { 
+        "exclude": ["samples/**"] 
+      }
+    }
+  }]
 }

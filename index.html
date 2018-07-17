@@ -9,10 +9,10 @@
     <link rel="manifest" href="manifest.json">
 
     <title>lit-element documentation</title>
-    
     <style>
       html, body {
         box-sizing: border-box;
+        font-family: Roboto;
         margin: 0;
         padding: 0;
         min-height: 100%;
@@ -22,22 +22,81 @@
         box-sizing: border-box;
         min-height: 100%;
       }
-      /* for placeholder content */
-      header {
-        height: 37px;
+    </style>
+
+    <style id="placeholderstyle">
+      #placeholderheader {
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 400;
+        height: 40px;
+        line-height: 24px;
         background-color: rgb(81, 45, 168);
+        color: #FFFFFF;
         display: block;
         width: 100%;
+        padding: 8px;
       }
-      main {
+      #placeholdermain {
+        padding: 8px;
+        box-sizing: border-box;
+        display: block;
         height: 603px;
+        width: 100%;
       }
-      nav {
-        background-color: rgb(239, 239, 239);
+      #placeholdernav {
+        box-sizing: border-box;
+        width: 100%;
+      }
+      #placeholderbreadcrumbs{
+        font-size: 14px;
+        font-weight: 300;
+      }
+      #placeholdercategoryheading{
+        font-size: 20px;
+        font-weight: 450;
+        padding-top: 16px;
+      }
+      #placeholderprojectheading{
+        font-size: 16px;
+        font-weight: 450;
+        padding-top: 8px;
+      }
+      #placeholderfooter {
+        box-sizing: border-box;
+        position: fixed;
+        bottom: 0px;
         display: block;
         margin-top: 8px;
-        height: 501px;
+        padding: 8px;
         width: 100%;
+      }
+      @media(min-width: 900px){
+        app-shell {
+          display: flex;
+          flex-flow: row wrap;
+          align-content: flex-start;
+        }
+        #placeholderheader{
+          order: 1;
+          flex: 0 100%;
+        }
+        #placeholdermain{
+          order: 3;
+          flex: 1 0px;
+        }
+        #placeholdernav{
+          margin-top: 0px;
+          order: 2;
+          flex: 0 30%;
+          max-width: 25%;
+          background-color: #efefef;
+        }   
+        #placeholderfooter{
+          order: 4;
+          flex: 0 100%;
+        }
       }
     </style>
     
@@ -48,19 +107,11 @@
       }
     </script>
 
-    <!-- Asynchronously load polyfills -->
-    <script 
-      src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" 
-      defer>
-    </script>
-
-    <!-- Wait for polyfills to finish loading before importing app-shell -->
-    <script type="module">
-      WebComponents.waitFor(() => {
-        return import('src/app-shell.js');
-      });
-    </script>
+    <!-- Load polyfills -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" defer></script>
     
+    <!-- Load app shell -->
+    <script type="module" src="src/app-shell.js"></script>
     <style>
       /** 
       * App theme. A set of custom properties defining UI colors and typography. 
@@ -116,120 +167,26 @@
         --gutter6: 48px;
       }
     </style>
+
   </head>
   <body>
     <app-shell>
-      <div id="placeholder">
-        <header></header>
-        <main></main>
-        <nav>
-          <div></div>
-          <div></div>
-          <div></div>
-        </nav>
-        <footer>© 2018 The Polymer Team</footer>
-      </div>
+      <header id="placeholderheader"><div>lit-element documentation</div></header>
+      <main id="placeholdermain">
+        <div id="placeholderbreadcrumbs">Get started with lit-element > Create a custom element</div>
+        <div id="placeholdercategoryheading">Get started with lit-element</div>
+        <div id="placeholderprojectheading">Create a custom element</div>
+        <div></div> 
+        <div></div>
+        <div></div>
+      </main>
+      <nav id="placeholdernav">
+        <div></div>
+        <div></div> 
+        <div></div>
+        <div></div>
+      </nav>
+      <footer id="placeholderfooter"></footer>
     </app-shell>
   </body>
 </html>
-
-<!-- 
-  
-  Full placeholder content and styles for first paint and avoiding FOUC.
-  
-  Too much placeholder stuff seems to slow down time to interactive, but
-  not having enough slows down time to first paint. 
-  
-  A balance makes Lighthouse happy.
-  
-  Leaving this here for future reference.
-
-<style>
-  html, body {
-    box-sizing: border-box;
-    font-size: 16px;
-    font-family: Roboto, Helvetica, sans-serif;
-    font-weight: 350;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-  }
-  app-shell {
-    box-sizing: border-box;
-    min-height: 100%;
-  }
-  header {
-    font-size: 18px;
-    font-weight: 400;
-    height: 37px;
-    background-color: rgb(81, 45, 168);
-    display: block;
-    width: 100%;
-  }
-  nav {
-    background-color: rgb(239, 239, 239);
-    box-sizing: border-box;
-    display: block;
-    margin-top: 8px;
-    height: 501px;
-    padding-bottom: 8px;
-    width: 100%;
-  }
-  main {
-    padding: 8px;
-    box-sizing: border-box;
-    display: block;
-    height: 603px;
-    width: 100%;
-  }
-  .h1cat {
-    font-size: 18px;
-    font-weight: 450;
-  }
-  .h2proj {
-    font-weight: 450;
-    padding-top: 8px;
-  }
-  .content {
-    height: 37px;
-    width: 100%;
-    background-color: #5d5d5d;
-    margin-top: 8px; 
-    margin-bottom: 16px;
-  }
-  .contentdisabled {
-    opacity: 0.55;
-  }
-  footer {
-    box-sizing: border-box;
-    display: block;
-    margin-top: 8px;
-    padding: 8px;
-    width: 100%;
-  }
-</style>
-
-<app-shell>
-  <div id="placeholder">
-    <header><div>lit-element documentation</div></header>
-    <main>
-      <div class="h1cat">Get started with lit-element</div>
-      <div class="h2proj">Introduction</div>
-      <div class="content"></div>
-      <div class="content contentdisabled"></div>
-    </main>
-    <nav>
-      <ul>
-        <li><p>Get started with lit-element</p></li>
-        <li><p>lit-element for Polymer users</p></li>
-        <li><p>Use properties and data</p></li>
-        <li><p>Use lit-element lifecycle callbacks</p></li>
-        <li><p>Fire and handle events</p></li>
-        <li><p>Style an element or app</p></li>
-      </ul>
-      </nav>
-    <footer>© 2018 The Polymer Team</footer>
-  <div id="placeholder">  
-</app-shell>
--->
