@@ -74,7 +74,7 @@ class StackblitzContainer extends LitElement{
    * the first project.
    */
   _firstRendered(){
-    this.loadProject(1).then(console.log('loaded project'));
+    this.loadProject(1);
   }
   
   /**
