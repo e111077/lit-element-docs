@@ -8,8 +8,8 @@ import * as Lit from 'lit-html';
 import 'prismjs';
 
 /**
- * readme-container element displays the README file of the active project. 
- * Currently it uses an iframe populated with an HTML document, 
+ * readme-container element displays the README file of the active project.
+ * Currently it uses an iframe populated with an HTML document,
  * which is generated from the project's README.md during the build process.
  */
 export class ReadmeContainer extends LitElement{
@@ -24,6 +24,38 @@ export class ReadmeContainer extends LitElement{
    * Highlight code blocks in shadow DOM using prismjs API.
    */
   async highlightCodeBlocks(){
+    // add tagged template literal highlighting if not already defined
+    if (!Prism.languages.javascript['html-tagged-template-string']) {
+      const tInterp = Prism.languages.javascript['template-string'].inside.interpolation;
+      // insert interpolation ${} highlighting in html before tags
+      Prism.languages.insertBefore('html', 'tag', {
+        interpolation: {
+          pattern: tInterp.pattern,
+          inside: tInterp.inside
+        }
+      });
+
+      // insert interpolation ${} highlihgting inside html tags' before attr values
+      Prism.languages.insertBefore('inside', 'attr-value', {
+        interpolation: {
+          pattern: tInterp.pattern,
+          inside: tInterp.inside
+        }
+      }, Prism.languages.html.tag);
+
+      const htmlTokens = Prism.languages.html;
+      // insert tagged-template highlighting
+      Prism.languages.insertBefore('javascript','template-string', {
+        'html-tagged-template-string': {
+          // this is just the pattern "html" prepended to the default pattern
+          // for template literals found in
+          // Prism.languages.javascript['template-string'].pattern
+          pattern: /html`(?:\\[\s\S]|\${[^}]+}|[^\\`])*`/,
+          alias: 'language-html',
+          inside: htmlTokens
+        }
+      });
+    }
     Prism.highlightAllUnder(this.shadowRoot);
   }
 
@@ -41,7 +73,7 @@ export class ReadmeContainer extends LitElement{
   }
 
   /**
-   * After each render, call a function to highlight code blocks. 
+   * After each render, call a function to highlight code blocks.
    */
   _didRender(){
     this.highlightCodeBlocks();
