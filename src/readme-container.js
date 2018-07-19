@@ -27,21 +27,19 @@ export class ReadmeContainer extends LitElement{
     // add tagged template literal highlighting if not already defined
     if (!Prism.languages.javascript['html-tagged-template-string']) {
       const tInterp = Prism.languages.javascript['template-string'].inside.interpolation;
-      // insert interpolation ${} highlighting in html before tags
-      Prism.languages.insertBefore('html', 'tag', {
+      const interpToken = {
         interpolation: {
           pattern: tInterp.pattern,
           inside: tInterp.inside
         }
-      });
+      };
+
+      // insert interpolation ${} highlighting in html before tags in all HTML
+      Prism.languages.insertBefore('html', 'tag', interpToken);
 
       // insert interpolation ${} highlihgting inside html tags' before attr values
-      Prism.languages.insertBefore('inside', 'attr-value', {
-        interpolation: {
-          pattern: tInterp.pattern,
-          inside: tInterp.inside
-        }
-      }, Prism.languages.html.tag);
+      Prism.languages.insertBefore(
+          'inside', 'attr-value', interpToken, Prism.languages.html.tag);
 
       const htmlTokens = Prism.languages.html;
       // insert tagged-template highlighting
